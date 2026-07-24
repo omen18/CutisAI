@@ -1,0 +1,484 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+.d{
+  --bg:       #FAF7F2;
+  --bg2:      #F3EDE3;
+  --bg3:      #EDE4D6;
+  --card:     #FFFFFF;
+  --burg:     #6B1E3A;
+  --burg2:    #8B2850;
+  --burg3:    #4A1228;
+  --rose:     #C9637A;
+  --rose2:    #E8A0AF;
+  --gold:     #B8860B;
+  --gold2:    #D4A017;
+  --sage:     #4A6741;
+  --sage2:    #6B9463;
+  --slate:    #3D4F5C;
+  --slate2:   #5A6E7A;
+  --muted:    #8A7E75;
+  --muted2:   #A89D94;
+  --muted3:   #C4BAB0;
+  --line:     rgba(107,30,58,0.10);
+  --line2:    rgba(107,30,58,0.18);
+  font-family:'Geist',sans-serif;
+  background:var(--bg);
+  color:var(--slate);
+  min-height:600px;
+}
+
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;height:52px;
+  background:var(--burg3);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-ring{
+  width:28px;height:28px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.5);
+  display:flex;align-items:center;justify-content:center;
+}
+.logo-ring svg{width:13px;height:13px;}
+.logo-name{font-family:'Instrument Serif',serif;font-size:18px;color:#FAF7F2;letter-spacing:0.3px;}
+.logo-ver{font-family:'Geist Mono',monospace;font-size:10px;color:rgba(250,247,242,0.4);margin-left:6px;letter-spacing:1px;}
+.topnav{display:flex;gap:2px;}
+.tn{
+  padding:5px 13px;border-radius:5px;font-size:12px;font-weight:500;
+  color:rgba(250,247,242,0.5);cursor:pointer;border:none;
+  background:transparent;font-family:'Geist',sans-serif;transition:all 0.15s;
+}
+.tn:hover{color:rgba(250,247,242,0.9);background:rgba(255,255,255,0.07);}
+.tn.on{color:#FAF7F2;background:rgba(255,255,255,0.12);}
+.topright{display:flex;align-items:center;gap:12px;}
+.pulse-row{display:flex;align-items:center;gap:5px;font-family:'Geist Mono',monospace;font-size:11px;color:var(--rose2);}
+.pulse{width:5px;height:5px;border-radius:50%;background:var(--rose2);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.av{width:28px;height:28px;border-radius:50%;background:var(--rose);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;}
+
+.wrap{display:flex;}
+.side{
+  width:192px;flex-shrink:0;
+  background:var(--card);
+  border-right:1px solid var(--line);
+  padding:16px 10px;
+  display:flex;flex-direction:column;gap:2px;
+}
+.sg{font-size:9px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted3);padding:10px 10px 4px;margin-top:4px;}
+.si{
+  display:flex;align-items:center;gap:9px;padding:7px 10px;
+  border-radius:7px;font-size:12px;font-weight:500;color:var(--muted);
+  cursor:pointer;border:none;background:transparent;
+  font-family:'Geist',sans-serif;width:100%;text-align:left;transition:all 0.15s;
+}
+.si:hover{color:var(--slate);background:var(--bg2);}
+.si.on{color:var(--burg);background:rgba(107,30,58,0.07);}
+.si svg{width:14px;height:14px;flex-shrink:0;opacity:0.8;}
+.sb{margin-left:auto;font-family:'Geist Mono',monospace;font-size:9px;font-weight:500;padding:2px 6px;border-radius:4px;}
+.sb-g{background:rgba(74,103,65,0.12);color:var(--sage);}
+.sb-r{background:rgba(201,99,122,0.12);color:var(--rose);}
+
+.content{flex:1;padding:20px 24px;display:flex;flex-direction:column;gap:18px;min-width:0;}
+
+.ph{display:flex;justify-content:space-between;align-items:flex-end;}
+.ph-left{}
+.ptag{font-family:'Geist Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--rose);margin-bottom:4px;}
+.ptitle{font-family:'Instrument Serif',serif;font-size:26px;color:var(--burg3);letter-spacing:-0.3px;line-height:1;}
+.psub{font-size:11px;color:var(--muted2);margin-top:4px;font-family:'Geist Mono',monospace;}
+.btn-main{
+  display:flex;align-items:center;gap:7px;
+  padding:9px 18px;border-radius:8px;font-size:12px;font-weight:600;
+  background:var(--burg);color:#FAF7F2;border:none;cursor:pointer;
+  font-family:'Geist',sans-serif;transition:all 0.15s;letter-spacing:0.2px;
+}
+.btn-main:hover{background:var(--burg2);}
+.btn-main svg{width:13px;height:13px;}
+
+.krow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.kc{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:14px 16px;position:relative;overflow:hidden;
+  transition:border-color 0.2s;
+}
+.kc:hover{border-color:var(--line2);}
+.kc-stripe{position:absolute;bottom:0;left:0;right:0;height:2px;}
+.kl{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted2);margin-bottom:8px;}
+.kv{font-family:'Instrument Serif',serif;font-size:30px;color:var(--burg3);line-height:1;letter-spacing:-0.5px;}
+.ksub{font-size:11px;color:var(--muted2);margin-top:5px;display:flex;align-items:center;gap:4px;font-family:'Geist Mono',monospace;}
+.ku{color:var(--sage);} .kdn{color:var(--rose);}
+
+.g2{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start;}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.ch{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+.ct{font-family:'Instrument Serif',serif;font-size:15px;color:var(--burg3);}
+.ctag{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:5px;}
+.ctag-r{background:rgba(201,99,122,0.1);color:var(--rose);}
+.ctag-g{background:rgba(74,103,65,0.1);color:var(--sage);}
+.ctag-b{background:rgba(107,30,58,0.08);color:var(--burg);}
+.ctag-a{background:rgba(184,134,11,0.1);color:var(--gold);}
+
+.uzone{
+  margin:18px;border:1.5px dashed var(--muted3);border-radius:10px;
+  padding:32px 20px;text-align:center;cursor:pointer;
+  background:var(--bg);transition:all 0.2s;
+}
+.uzone:hover{border-color:var(--rose);background:rgba(201,99,122,0.03);}
+.uico{width:42px;height:42px;border-radius:50%;background:rgba(107,30,58,0.07);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+.uico svg{width:20px;height:20px;color:var(--burg);}
+.utitle{font-family:'Instrument Serif',serif;font-size:16px;color:var(--burg3);margin-bottom:4px;}
+.usub{font-size:12px;color:var(--muted2);}
+.ufmts{display:flex;gap:5px;justify-content:center;margin-top:12px;}
+.ufmt{background:var(--bg2);border:1px solid var(--line);color:var(--muted);font-size:10px;font-weight:600;padding:3px 8px;border-radius:5px;font-family:'Geist Mono',monospace;}
+
+.arow{display:flex;gap:12px;padding:14px 18px;border-top:1px solid var(--line);align-items:center;}
+.ath{width:52px;height:52px;border-radius:8px;flex-shrink:0;overflow:hidden;position:relative;}
+.ath-bg{width:100%;height:100%;background:radial-gradient(circle at 60% 45%,#D4956A 0%,#8B4513 45%,#3D2010 100%);}
+.ath-mask{position:absolute;inset:0;border:1.5px solid rgba(201,99,122,0.6);border-radius:8px;}
+.ai-info{flex:1;min-width:0;}
+.ai-name{font-size:12px;font-weight:600;color:var(--slate);}
+.ai-meta{font-size:10px;color:var(--muted2);font-family:'Geist Mono',monospace;margin-top:2px;}
+.pbar{height:2px;background:var(--bg2);border-radius:2px;margin-top:8px;overflow:hidden;}
+.pfill{height:100%;border-radius:2px;background:var(--burg);animation:pgo 2s ease-in-out infinite alternate;}
+@keyframes pgo{from{width:40%;}to{width:80%};}
+
+.htable{width:100%;border-collapse:collapse;}
+.htable th{font-size:9px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted3);padding:9px 16px;text-align:left;border-bottom:1px solid var(--line);}
+.htable td{font-size:12px;color:var(--muted);padding:9px 16px;border-bottom:1px solid rgba(107,30,58,0.05);vertical-align:middle;}
+.htable tr:hover td{background:var(--bg);color:var(--slate);}
+.htable td:first-child{color:var(--slate);font-weight:500;font-family:'Geist Mono',monospace;font-size:11px;}
+.bdg{font-size:9px;font-weight:600;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;}
+.bdg-m{background:rgba(201,99,122,0.1);color:var(--rose);}
+.bdg-b{background:rgba(74,103,65,0.1);color:var(--sage);}
+
+.res-img{margin:14px;border-radius:10px;overflow:hidden;position:relative;height:150px;background:radial-gradient(ellipse at 58% 48%,#C4835A 0%,#8B4A20 30%,#4A2010 65%,#1E0E08 100%);}
+.res-mask{position:absolute;inset:0;background:radial-gradient(ellipse at 58% 48%,rgba(107,30,58,0.25) 0%,rgba(107,30,58,0.1) 50%,transparent 75%);}
+.res-ring{position:absolute;top:50%;left:57%;transform:translate(-50%,-50%);width:84px;height:70px;border:1.5px solid rgba(201,99,122,0.75);border-radius:50% 55% 48% 52%/52% 48% 55% 50%;}
+.res-label{position:absolute;bottom:8px;right:8px;background:rgba(250,247,242,0.88);border-radius:5px;padding:3px 7px;font-size:10px;font-weight:600;color:var(--burg);font-family:'Geist Mono',monospace;}
+
+.rtabs{display:flex;gap:2px;padding:0 14px;}
+.rtb{padding:5px 11px;font-size:11px;font-weight:500;border-radius:6px;cursor:pointer;color:var(--muted2);transition:all 0.15s;}
+.rtb.on{background:rgba(107,30,58,0.07);color:var(--burg);}
+
+.rmain{padding:12px 16px;}
+.diag-tag{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px;}
+.diag-val{font-family:'Instrument Serif',serif;font-size:24px;color:var(--burg3);display:flex;align-items:center;gap:8px;}
+.diag-ico{width:26px;height:26px;border-radius:50%;background:rgba(201,99,122,0.1);display:flex;align-items:center;justify-content:center;}
+.diag-ico svg{width:12px;height:12px;color:var(--rose);}
+
+.cbar-row{margin-top:12px;}
+.cbar-head{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;}
+.cbar-name{color:var(--muted2);font-weight:500;}
+.cbar-pct{font-family:'Geist Mono',monospace;font-weight:600;}
+.cbar-track{height:4px;background:var(--bg2);border-radius:4px;overflow:hidden;margin-bottom:5px;}
+.cbar-fill{height:100%;border-radius:4px;}
+
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px;}
+.mm{background:var(--bg);border-radius:8px;padding:9px 11px;}
+.mml{font-size:9px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted2);margin-bottom:3px;}
+.mmv{font-family:'Geist Mono',monospace;font-size:15px;font-weight:500;color:var(--burg3);}
+
+.rec{background:rgba(201,99,122,0.06);border:1px solid rgba(201,99,122,0.18);border-radius:8px;padding:11px 13px;margin-top:12px;}
+.rec-t{font-size:9px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--rose);margin-bottom:5px;}
+.rec-b{font-size:11px;color:var(--muted);line-height:1.55;}
+
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+
+.minibars{display:flex;align-items:flex-end;gap:4px;height:72px;padding:0 18px;}
+.mb{flex:1;border-radius:3px 3px 0 0;transition:opacity 0.2s;cursor:pointer;}
+.mb:hover{opacity:0.75;}
+.xlabs{display:flex;gap:4px;padding:3px 18px 14px;}
+.xl{flex:1;font-size:9px;color:var(--muted3);text-align:center;font-family:'Geist Mono',monospace;letter-spacing:0.5px;}
+
+.plist{padding:6px 16px 14px;display:flex;flex-direction:column;gap:9px;}
+.pr{display:flex;align-items:center;gap:9px;}
+.pn{width:72px;font-size:11px;font-weight:500;color:var(--muted2);flex-shrink:0;}
+.pt{flex:1;height:3px;background:var(--bg2);border-radius:3px;overflow:hidden;}
+.pf{height:100%;border-radius:3px;}
+.pv{width:38px;text-align:right;font-size:11px;font-weight:500;font-family:'Geist Mono',monospace;color:var(--slate);}
+
+.feed{padding:6px 16px 14px;display:flex;flex-direction:column;}
+.fi{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);}
+.fi:last-child{border-bottom:none;}
+.fd{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.ft{font-size:11px;color:var(--muted);line-height:1.45;}
+.ft b{color:var(--slate);font-weight:600;}
+.ftime{font-size:10px;color:var(--muted3);font-family:'Geist Mono',monospace;margin-top:3px;}
+</style>
+
+<div class="d">
+
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-ring">
+        <svg viewBox="0 0 13 13" fill="none">
+          <circle cx="6.5" cy="6.5" r="4.5" stroke="rgba(250,247,242,0.7)" stroke-width="1.2"/>
+          <circle cx="6.5" cy="6.5" r="1.8" fill="rgba(250,247,242,0.7)"/>
+          <path d="M6.5 1.5v1.2M6.5 10.3v1.2M1.5 6.5h1.2M10.3 6.5h1.2" stroke="rgba(250,247,242,0.5)" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="logo-name">CutisAI</span>
+      <span class="logo-ver">v2.1</span>
+    </div>
+    <div class="topnav">
+      <button class="tn on">Dashboard</button>
+      <button class="tn">Analysis</button>
+      <button class="tn">History</button>
+      <button class="tn">Research</button>
+      <button class="tn">Settings</button>
+    </div>
+    <div class="topright">
+      <div class="pulse-row"><div class="pulse"></div>Models ready</div>
+      <div class="av">DR</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <aside class="side">
+      <div class="sg">Workspace</div>
+      <button class="si on">
+        <svg viewBox="0 0 14 14" fill="currentColor"><rect x="1" y="1" width="5.5" height="5.5" rx="1.2"/><rect x="7.5" y="1" width="5.5" height="5.5" rx="1.2"/><rect x="1" y="7.5" width="5.5" height="5.5" rx="1.2"/><rect x="7.5" y="7.5" width="5.5" height="5.5" rx="1.2"/></svg>
+        Overview
+      </button>
+      <button class="si">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><circle cx="7" cy="7" r="1.8" fill="currentColor" stroke="none"/></svg>
+        Analyse image
+        <span class="sb sb-r">New</span>
+      </button>
+      <button class="si">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="2.5" width="10" height="9" rx="1.5"/><path d="M4.5 6.5h5M4.5 9h3.5"/></svg>
+        Reports
+      </button>
+      <button class="si">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+        New patient
+      </button>
+
+      <div class="sg">AI Models</div>
+      <button class="si">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="2" y="5" width="10" height="4.5" rx="1.5"/><circle cx="5" cy="7.3" r="0.9" fill="currentColor" stroke="none"/><circle cx="9" cy="7.3" r="0.9" fill="currentColor" stroke="none"/></svg>
+        ResUNet
+        <span class="sb sb-g">v2.1</span>
+      </button>
+      <button class="si">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
+        EfficientNet-B0
+        <span class="sb sb-g">v1.4</span>
+      </button>
+
+      <div class="sg">Data</div>
+      <button class="si">
+        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><ellipse cx="7" cy="4.5" rx="4.5" ry="1.8"/><path d="M2.5 4.5v2.5c0 1 2 1.8 4.5 1.8s4.5-.8 4.5-1.8V4.5"/><path d="M2.5 7v2.5c0 1 2 1.8 4.5 1.8s4.5-.8 4.5-1.8V7"/></svg>
+        ISIC dataset
+      </button>
+    </aside>
+
+    <main class="content">
+
+      <div class="ph">
+        <div class="ph-left">
+          <div class="ptag">Clinical Platform</div>
+          <div class="ptitle">Good morning, Dr. Raj</div>
+          <div class="psub">Sun 15 Mar 2026 &nbsp;·&nbsp; 3 analyses queued</div>
+        </div>
+        <button class="btn-main" onclick="sendPrompt('I want to upload a new skin lesion image for analysis')">
+          <svg viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 1.5v10M1.5 6.5h10"/></svg>
+          New analysis
+        </button>
+      </div>
+
+      <div class="krow">
+        <div class="kc">
+          <div class="kc-stripe" style="background:var(--burg);"></div>
+          <div class="kl">Total analyses</div>
+          <div class="kv">2,847</div>
+          <div class="ksub"><span class="ku">+12.4%</span>&nbsp;this month</div>
+        </div>
+        <div class="kc">
+          <div class="kc-stripe" style="background:var(--rose);"></div>
+          <div class="kl">Malignant flags</div>
+          <div class="kv">341</div>
+          <div class="ksub"><span class="kdn">+3.1%</span>&nbsp;vs prior</div>
+        </div>
+        <div class="kc">
+          <div class="kc-stripe" style="background:var(--sage);"></div>
+          <div class="kl">Model accuracy</div>
+          <div class="kv">91.7%</div>
+          <div class="ksub"><span class="ku">AUC-ROC 0.94</span></div>
+        </div>
+        <div class="kc">
+          <div class="kc-stripe" style="background:var(--gold);"></div>
+          <div class="kl">Avg inference</div>
+          <div class="kv">1.8s</div>
+          <div class="ksub"><span class="ku">−0.3s</span>&nbsp;vs baseline</div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div style="display:flex;flex-direction:column;gap:14px;">
+
+          <div class="card">
+            <div class="ch">
+              <span class="ct">Image analysis</span>
+              <span class="ctag ctag-b">ONNX · CPU</span>
+            </div>
+            <div class="uzone" onclick="sendPrompt('I want to upload a dermoscopic image for skin lesion analysis')">
+              <div class="uico">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 3v12M4 9l6-6 6 6"/><path d="M3 17h14"/>
+                </svg>
+              </div>
+              <div class="utitle">Drop dermoscopic image here</div>
+              <div class="usub">JPEG · PNG · TIFF &nbsp;—&nbsp; up to 20 MB</div>
+              <div class="ufmts">
+                <span class="ufmt">256 × 256 min</span>
+                <span class="ufmt">ImageNet norm</span>
+                <span class="ufmt">INT8 ONNX</span>
+              </div>
+            </div>
+            <div class="arow">
+              <div class="ath"><div class="ath-bg"></div><div class="ath-mask"></div></div>
+              <div class="ai-info">
+                <div class="ai-name">lesion_sample_047.jpg</div>
+                <div class="ai-meta">Stage 1 / 2 &nbsp;·&nbsp; Segmenting ROI</div>
+                <div class="pbar"><div class="pfill"></div></div>
+              </div>
+              <span class="ctag ctag-a">Running</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="ch">
+              <span class="ct">Recent history</span>
+              <span class="ctag ctag-b">Last 7 days</span>
+            </div>
+            <table class="htable">
+              <thead>
+                <tr>
+                  <th>File ID</th><th>Date</th><th>Diagnosis</th><th>Confidence</th><th>DSC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>LSN-2847</td><td>Mar 15</td><td><span class="bdg bdg-m">Malignant</span></td><td>94.2%</td><td>0.889</td></tr>
+                <tr><td>LSN-2846</td><td>Mar 15</td><td><span class="bdg bdg-b">Benign</span></td><td>88.5%</td><td>0.902</td></tr>
+                <tr><td>LSN-2845</td><td>Mar 14</td><td><span class="bdg bdg-m">Malignant</span></td><td>91.7%</td><td>0.876</td></tr>
+                <tr><td>LSN-2844</td><td>Mar 14</td><td><span class="bdg bdg-b">Benign</span></td><td>95.1%</td><td>0.921</td></tr>
+                <tr><td>LSN-2843</td><td>Mar 13</td><td><span class="bdg bdg-b">Benign</span></td><td>82.3%</td><td>0.855</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <div class="card">
+          <div class="ch">
+            <span class="ct">Analysis result</span>
+            <span class="ctag ctag-r">High risk</span>
+          </div>
+          <div class="res-img">
+            <div class="res-mask"></div>
+            <div class="res-ring"></div>
+            <div class="res-label">Mask overlay</div>
+          </div>
+          <div class="rtabs">
+            <div class="rtb on">Result</div>
+            <div class="rtb">Mask</div>
+            <div class="rtb">Raw</div>
+          </div>
+          <div class="rmain">
+            <div class="diag-tag">Primary diagnosis</div>
+            <div class="diag-val">
+              <div class="diag-ico">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 2.5V7M6 9v.5"/></svg>
+              </div>
+              Malignant
+            </div>
+
+            <div class="cbar-row">
+              <div class="cbar-head"><span class="cbar-name">Malignant</span><span class="cbar-pct" style="color:var(--rose)">94.2%</span></div>
+              <div class="cbar-track"><div class="cbar-fill" style="width:94%;background:var(--rose);"></div></div>
+              <div class="cbar-head"><span class="cbar-name">Benign</span><span class="cbar-pct" style="color:var(--muted3)">5.8%</span></div>
+              <div class="cbar-track"><div class="cbar-fill" style="width:6%;background:var(--muted3);"></div></div>
+            </div>
+
+            <div class="mgrid">
+              <div class="mm"><div class="mml">DSC score</div><div class="mmv" style="color:var(--burg)">0.889</div></div>
+              <div class="mm"><div class="mml">IoU</div><div class="mmv" style="color:var(--burg)">0.801</div></div>
+              <div class="mm"><div class="mml">Infer. time</div><div class="mmv">1.74s</div></div>
+              <div class="mm"><div class="mml">Model</div><div class="mmv" style="font-size:12px;color:var(--muted2)">EffNet-B0</div></div>
+            </div>
+
+            <div class="rec">
+              <div class="rec-t">Clinical recommendation</div>
+              <div class="rec-b">High suspicion of malignancy. Urgent dermatologist referral advised. Dermoscopic biopsy recommended within 5 days.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="g3">
+
+        <div class="card">
+          <div class="ch"><span class="ct">Weekly volume</span><span class="ctag ctag-b">Analyses</span></div>
+          <div class="minibars">
+            <div class="mb" style="height:56%;background:var(--burg3);opacity:0.5;"></div>
+            <div class="mb" style="height:73%;background:var(--burg3);opacity:0.65;"></div>
+            <div class="mb" style="height:49%;background:var(--burg3);opacity:0.45;"></div>
+            <div class="mb" style="height:90%;background:var(--burg);"></div>
+            <div class="mb" style="height:66%;background:var(--burg3);opacity:0.65;"></div>
+            <div class="mb" style="height:40%;background:var(--burg3);opacity:0.4;"></div>
+            <div class="mb" style="height:22%;background:var(--burg3);opacity:0.3;"></div>
+          </div>
+          <div class="xlabs">
+            <div class="xl">MON</div><div class="xl">TUE</div><div class="xl">WED</div>
+            <div class="xl">THU</div><div class="xl">FRI</div><div class="xl">SAT</div><div class="xl">SUN</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ch"><span class="ct">Model performance</span><span class="ctag ctag-g">Live</span></div>
+          <div class="plist">
+            <div class="pr"><div class="pn">AUC-ROC</div><div class="pt"><div class="pf" style="width:94%;background:var(--burg);"></div></div><div class="pv">0.94</div></div>
+            <div class="pr"><div class="pn">DSC</div><div class="pt"><div class="pf" style="width:88%;background:var(--burg);"></div></div><div class="pv">0.88</div></div>
+            <div class="pr"><div class="pn">Sensitivity</div><div class="pt"><div class="pf" style="width:89%;background:var(--rose);"></div></div><div class="pv">0.89</div></div>
+            <div class="pr"><div class="pn">Specificity</div><div class="pt"><div class="pf" style="width:83%;background:var(--rose);"></div></div><div class="pv">0.83</div></div>
+            <div class="pr"><div class="pn">F1 Macro</div><div class="pt"><div class="pf" style="width:86%;background:var(--sage);"></div></div><div class="pv">0.86</div></div>
+            <div class="pr"><div class="pn">IoU</div><div class="pt"><div class="pf" style="width:80%;background:var(--sage);"></div></div><div class="pv">0.80</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ch"><span class="ct">Activity feed</span><span class="ctag ctag-r">Live</span></div>
+          <div class="feed">
+            <div class="fi">
+              <div class="fd" style="background:var(--rose);"></div>
+              <div><div class="ft"><b>LSN-2847</b> flagged as high-risk malignant — 94.2% confidence</div><div class="ftime">2 min ago</div></div>
+            </div>
+            <div class="fi">
+              <div class="fd" style="background:var(--burg);"></div>
+              <div><div class="ft"><b>EfficientNet-B0</b> weights updated to v1.4</div><div class="ftime">18 min ago</div></div>
+            </div>
+            <div class="fi">
+              <div class="fd" style="background:var(--sage);"></div>
+              <div><div class="ft"><b>LSN-2846</b> cleared benign — 88.5% confidence</div><div class="ftime">34 min ago</div></div>
+            </div>
+            <div class="fi">
+              <div class="fd" style="background:var(--gold);"></div>
+              <div><div class="ft"><b>ISIC dataset</b> sync complete — 33,126 images</div><div class="ftime">1 hr ago</div></div>
+            </div>
+            <div class="fi">
+              <div class="fd" style="background:var(--rose);"></div>
+              <div><div class="ft"><b>LSN-2845</b> second malignant flag in 24h — review queued</div><div class="ftime">2 hr ago</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>

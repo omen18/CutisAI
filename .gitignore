@@ -1,0 +1,158 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# CutisAI — .gitignore
+# Place this file at the ROOT of your project: skinLesion/.gitignore
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# ── Virtual Environments ──────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+ENV/
+backend/venv/
+backend/.venv/
+
+# ── Environment Variables — NEVER commit secrets ──────────────────────────────
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+*.env
+!.env.example          # keep the example template
+
+# ── ONNX Models — too large for git (use git-lfs or just download from Kaggle)
+backend/artefacts/models/*.onnx
+backend/artefacts/models/*.pth
+backend/artefacts/models/*.pt
+backend/artefacts/checkpoints/
+training/artefacts/
+*.onnx
+*.pth
+*.pt
+*.pkl
+*.h5
+*.weights
+# Models — never commit
+backend/artefacts/
+artefacts/
+*.onnx
+*.pth
+*.pt
+
+# ── Datasets — never commit raw data ─────────────────────────────────────────
+training/data/raw/
+training/data/interim/
+training/data/processed/
+training/data/external/
+training/src/data/raw_isic/
+training/src/data/processed/
+training/src/data/splits/
+data/
+*.csv.gz
+*.zip
+*.tar
+*.tar.gz
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+*.tsbuildinfo
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+backend/logs/
+training/artefacts/logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Database ──────────────────────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+postgres_data/
+
+# ── Docker volumes ────────────────────────────────────────────────────────────
+docker-volumes/
+.docker/
+
+# ── OS files ──────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── IDE / Editor ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.cursor/
+
+# ── Jupyter Notebooks (outputs only — keep .ipynb but strip outputs) ──────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ── Testing & Coverage ────────────────────────────────────────────────────────
+.coverage
+.coverage.*
+coverage/
+htmlcov/
+.pytest_cache/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# ── Monitoring data ───────────────────────────────────────────────────────────
+infrastructure/monitoring/grafana/data/
+infrastructure/monitoring/prometheus/data/
+infrastructure/monitoring/loki/data/
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+*.bak
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
+
+# Project specific
+copilotInstruction.md
+instruction.md
+derma-training/

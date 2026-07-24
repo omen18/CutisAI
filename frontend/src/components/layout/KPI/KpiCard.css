@@ -1,0 +1,64 @@
+/* frontend/src/components/layout/KPI/KpiCard.css */
+
+.kpi-card {
+  background-color: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.15s;
+}
+.kpi-card:hover {
+  border-color: var(--line2);
+}
+
+.kpi-card__stripe {
+  width: 4px;
+  flex-shrink: 0;
+  background-color: var(--kpi-stripe, var(--burg));
+  border-radius: var(--r2) 0 0 var(--r2);
+}
+
+.kpi-card__body {
+  padding: var(--s3) var(--s4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kpi-card__label {
+  font-size: 9px;
+  color: var(--muted2);
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.kpi-card__value {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  color: var(--burg3);
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+}
+
+.kpi-card__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: 2px;
+}
+
+.kpi-card__sub {
+  font-size: 10px;
+  color: var(--muted2);
+}
+
+.kpi-card__trend {
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+.kpi-card__trend--up    { color: var(--sage); }
+.kpi-card__trend--down  { color: var(--rose); }
+.kpi-card__trend--neutral { color: var(--gold); }

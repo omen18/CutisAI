@@ -1,0 +1,57 @@
+/* frontend/src/components/layout/Card/Card.css */
+
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  padding: var(--s4);
+}
+
+.card--no-padding {
+  padding: 0;
+}
+
+/* Card Header */
+.card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--s4);
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--line);
+}
+
+.card__header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.card__header-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.card__title {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--burg3);
+  letter-spacing: 0.1px;
+}
+
+.card__subtitle {
+  font-size: 10px;
+  color: var(--muted2);
+  letter-spacing: 0.2px;
+}
+
+.card__header-badge {
+  display: flex;
+  align-items: center;
+}
+
+.card__header-action {
+  flex-shrink: 0;
+}

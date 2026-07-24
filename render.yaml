@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: cutis-ai-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python download_models.py
+    startCommand: cd src && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: FRONTEND_URL
+        value: https://derma-ai-zeta.vercel.app
+      - key: HF_REPO_ID
+        value: alamfarzann/derma-ai-models
+      - key: HF_TOKEN
+        sync: false
+      - key: SEGMENTATION_MODEL_PATH
+        value: ../artefacts/models/segmentation.onnx
+      - key: CLASSIFICATION_MODEL_PATH
+        value: ../artefacts/models/classification.onnx

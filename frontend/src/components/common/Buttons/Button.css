@@ -1,0 +1,90 @@
+/* frontend/src/components/common/Buttons/Button.css */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--r1);
+  padding: 8px var(--s4);
+  height: 36px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s, opacity 0.15s;
+  white-space: nowrap;
+  letter-spacing: 0.1px;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn--sm {
+  font-size: 12px;
+  height: 30px;
+  padding: 6px 12px;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+/* Primary */
+.btn--primary {
+  background-color: var(--burg);
+  color: #FAF7F2;
+}
+.btn--primary:hover:not(:disabled) {
+  background-color: var(--burg2);
+}
+
+/* Secondary */
+.btn--secondary {
+  background-color: transparent;
+  color: var(--burg);
+  border-color: var(--line2);
+}
+.btn--secondary:hover:not(:disabled) {
+  background-color: var(--bg2);
+  border-color: var(--burg);
+}
+
+/* Ghost */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--slate2);
+  border-color: transparent;
+}
+.btn--ghost:hover:not(:disabled) {
+  background-color: var(--bg2);
+  color: var(--slate);
+}
+
+/* Icon */
+.btn__icon {
+  display: flex;
+  align-items: center;
+}
+
+/* Spinner */
+.btn__spinner {
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid rgba(250, 247, 242, 0.3);
+  border-top-color: #FAF7F2;
+  border-radius: 50%;
+  animation: btn-spin 0.7s linear infinite;
+}
+.btn--secondary .btn__spinner,
+.btn--ghost .btn__spinner {
+  border-color: rgba(107,30,58,0.2);
+  border-top-color: var(--burg);
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}

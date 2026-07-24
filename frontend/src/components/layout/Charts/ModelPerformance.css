@@ -1,0 +1,52 @@
+/* frontend/src/components/layout/Charts/ModelPerformance.css */
+
+.model-perf {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.model-perf__row {}
+
+.model-perf__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.model-perf__label {
+  font-size: 10px;
+  color: var(--slate2);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.model-perf__value {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.model-perf__track {
+  height: 5px;
+  background-color: var(--bg2);
+  border-radius: 3px;
+  position: relative;
+  overflow: visible;
+}
+
+.model-perf__fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.model-perf__target-line {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 1.5px;
+  background-color: var(--gold);
+  border-radius: 1px;
+}

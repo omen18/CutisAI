@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0e0f;
+  --panel: #111618;
+  --border: #1e2a2d;
+  --olive-400: #9ca653;
+  --olive-500: #6b7c2e;
+  --olive-600: #556326;
+  --danger: #c0392b;
+  --warning: #d68910;
+  --success: #1e8449;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  background-color: var(--bg);
+  color: #c8d4b0;
+  font-family: 'Rajdhani', 'Arial Narrow', sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0d1214; }
+::-webkit-scrollbar-thumb { background: #2a3b2e; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--olive-500); }
+
+/* Scanline overlay */
+.scanline-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* Tactical panel */
+.tac-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.tac-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(107, 124, 46, 0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Corner decorations */
+.tac-corner {
+  position: relative;
+}
+.tac-corner::before,
+.tac-corner::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--olive-500);
+  border-style: solid;
+}
+.tac-corner::before {
+  top: 0; left: 0;
+  border-width: 2px 0 0 2px;
+}
+.tac-corner::after {
+  bottom: 0; right: 0;
+  border-width: 0 2px 2px 0;
+}
+
+/* Grid cell hover */
+.grid-cell {
+  transition: all 0.12s ease;
+  cursor: pointer;
+}
+.grid-cell:hover {
+  filter: brightness(1.3);
+  z-index: 10;
+}
+
+/* HP bar */
+.hp-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: #1a2a1a;
+  overflow: hidden;
+}
+.hp-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Blink cursor */
+.cursor-blink::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
+}
+
+/* Unit badge */
+.unit-badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+
+/* Glow effects */
+.glow-olive { text-shadow: 0 0 8px rgba(107, 124, 46, 0.8); }
+.glow-red { text-shadow: 0 0 8px rgba(192, 57, 43, 0.8); }
+.glow-blue { text-shadow: 0 0 8px rgba(26, 107, 138, 0.8); }
+
+/* Tactical button */
+.btn-tac {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: #c8d4b0;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  padding: 6px 16px;
+  font-size: 12px;
+}
+.btn-tac:hover {
+  border-color: var(--olive-500);
+  color: var(--olive-400);
+  background: rgba(107, 124, 46, 0.1);
+  box-shadow: 0 0 10px rgba(107, 124, 46, 0.15);
+}
+.btn-tac:active { transform: scale(0.97); }
+.btn-tac:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-tac.danger {
+  border-color: rgba(192, 57, 43, 0.5);
+  color: #e74c3c;
+}
+.btn-tac.danger:hover {
+  border-color: var(--danger);
+  background: rgba(192, 57, 43, 0.1);
+  box-shadow: 0 0 10px rgba(192, 57, 43, 0.2);
+}
+
+.btn-tac.primary {
+  border-color: var(--olive-600);
+  background: rgba(107, 124, 46, 0.15);
+  color: var(--olive-400);
+}
+.btn-tac.primary:hover {
+  background: rgba(107, 124, 46, 0.25);
+  box-shadow: 0 0 12px rgba(107, 124, 46, 0.3);
+}
+
+/* Log entry */
+.log-entry {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(30, 42, 45, 0.5);
+}
+
+/* Terrain colors */
+.terrain-plains  { background-color: #1a2218; }
+.terrain-forest  { background-color: #0f1f10; }
+.terrain-hills   { background-color: #1a1a14; }
+.terrain-water   { background-color: #0d1a20; }
+
+/* Selected cell */
+.cell-selected {
+  outline: 2px solid var(--olive-400);
+  outline-offset: -2px;
+  z-index: 20;
+}
+
+/* Action flash */
+@keyframes flash-attack {
+  0% { background-color: rgba(192, 57, 43, 0.6); }
+  100% { background-color: transparent; }
+}
+.flash-attack { animation: flash-attack 0.4s ease-out; }
+
+@keyframes flash-move {
+  0% { background-color: rgba(107, 124, 46, 0.5); }
+  100% { background-color: transparent; }
+}
+.flash-move { animation: flash-move 0.4s ease-out; }

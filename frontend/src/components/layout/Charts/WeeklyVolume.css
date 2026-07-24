@@ -1,0 +1,57 @@
+/* frontend/src/components/layout/Charts/WeeklyVolume.css */
+
+.weekly-volume {
+  width: 100%;
+}
+
+.weekly-volume__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s2);
+  height: 120px;
+}
+
+.weekly-volume__col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+}
+
+.weekly-volume__count {
+  font-size: 9px;
+  color: var(--muted2);
+  line-height: 1;
+  min-height: 12px;
+}
+
+.weekly-volume__bar-track {
+  flex: 1;
+  width: 100%;
+  background-color: var(--bg2);
+  border-radius: 3px 3px 0 0;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.weekly-volume__bar-fill {
+  width: 100%;
+  background-color: var(--burg);
+  border-radius: 3px 3px 0 0;
+  transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 3px;
+}
+
+.weekly-volume__col:hover .weekly-volume__bar-fill {
+  background-color: var(--burg2);
+}
+
+.weekly-volume__label {
+  font-size: 9px;
+  color: var(--muted3);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}

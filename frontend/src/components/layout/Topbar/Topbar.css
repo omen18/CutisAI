@@ -1,0 +1,124 @@
+/* frontend/src/components/layout/Topbar/Topbar.css */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--topbar-h);
+  background-color: var(--burg3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--s5);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Brand */
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.topbar__logo-mark {
+  color: var(--rose2);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.topbar__product-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: #FAF7F2;
+  letter-spacing: 0.3px;
+}
+
+.topbar__panel-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--rose2);
+  background: rgba(201, 99, 122, 0.15);
+  border: 1px solid rgba(201, 99, 122, 0.25);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-left: var(--s1);
+}
+
+/* Status */
+.topbar__status {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.topbar__pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--rose2);
+  animation: topbar-pulse 2s ease-in-out infinite;
+}
+
+@keyframes topbar-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+.topbar__status-text {
+  font-size: 11px;
+  color: rgba(250, 247, 242, 0.45);
+  letter-spacing: 0.3px;
+}
+
+/* Nav */
+.topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+}
+
+.topbar__nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(250, 247, 242, 0.65);
+  transition: color 0.15s ease;
+}
+.topbar__nav-link:hover {
+  color: #FAF7F2;
+}
+
+.topbar__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r1);
+  color: rgba(250, 247, 242, 0.65);
+  transition: background-color 0.15s, color 0.15s;
+}
+.topbar__icon-btn:hover {
+  background-color: rgba(255,255,255,0.08);
+  color: #FAF7F2;
+}
+
+.topbar__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--burg2);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #FAF7F2;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.topbar__avatar:hover {
+  border-color: var(--rose2);
+}
