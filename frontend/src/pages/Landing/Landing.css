@@ -55,11 +55,6 @@ a { text-decoration: none; color: inherit; }
 .lp-orb {
   display: none;
 }
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(100px);
-}
 
 .lp-orb--1 {
   width: 600px; height: 600px;
