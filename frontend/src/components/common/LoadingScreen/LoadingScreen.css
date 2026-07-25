@@ -23,8 +23,8 @@
 
 .wc-loader--fading {
   opacity: 0;
-  transform: scale(1.04);
-  filter: blur(10px);
+  transform: scale(1.05);
+  filter: blur(12px);
 }
 
 /* ── Fullscreen Background Neural Canvas ──────────────────────────────────── */
@@ -35,7 +35,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.65;
+  opacity: 0.7;
 }
 
 /* ── Cybernetic Radial Ambient Glows ─────────────────────────────────────── */
@@ -43,14 +43,14 @@
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
-  filter: blur(120px);
+  filter: blur(130px);
   z-index: 0;
 }
 
 .wc-loader__glow--cyan {
-  width: 650px;
-  height: 650px;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.18) 0%, rgba(14, 165, 233, 0.02) 65%, transparent 100%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, rgba(14, 165, 233, 0.02) 65%, transparent 100%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -58,9 +58,9 @@
 }
 
 .wc-loader__glow--rose {
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(244, 63, 94, 0.1) 0%, transparent 70%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.12) 0%, transparent 70%);
   bottom: -100px;
   right: -100px;
   animation: wc-glow-float 10s ease-in-out infinite alternate;
@@ -114,9 +114,9 @@
 /* ── HUD Telemetry Frame Brackets ─────────────────────────────────────────── */
 .wc-loader__frame-bracket {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  border-color: rgba(14, 165, 233, 0.4);
+  width: 22px;
+  height: 22px;
+  border-color: rgba(14, 165, 233, 0.45);
   border-style: solid;
   pointer-events: none;
   z-index: 2;
@@ -166,23 +166,18 @@
   50%      { opacity: 0.3; transform: scale(0.85); }
 }
 
-.wc-loader__top-metrics {
+.wc-loader__telemetry-feed {
   display: flex;
-  gap: 20px;
+  gap: 8px;
 }
 
-.wc-loader__top-metric {
-  display: flex;
-  gap: 6px;
-}
-
-.wc-loader__metric-label {
-  color: #475569;
-}
-
-.wc-loader__metric-val {
+.wc-loader__telemetry-tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(14, 165, 233, 0.08);
+  border: 1px solid rgba(14, 165, 233, 0.18);
   color: #94A3B8;
-  font-weight: 500;
 }
 
 /* ── Main HUD Content Area ────────────────────────────────────────────────── */
@@ -193,7 +188,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 480px;
+  max-width: 500px;
   width: 92%;
   margin: auto 0;
 }
@@ -201,34 +196,32 @@
 /* ── Holographic Scanner Target Reticle ────────────────────────────────────── */
 .wc-loader__scanner {
   position: relative;
-  width: 240px;
-  height: 240px;
-  margin-bottom: 32px;
+  width: 260px;
+  height: 260px;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Outer Dashed Compass Ring */
 .wc-loader__ring--dashed {
   position: absolute;
-  width: 236px;
-  height: 236px;
+  width: 256px;
+  height: 256px;
   border-radius: 50%;
-  border: 1px dashed rgba(14, 165, 233, 0.18);
+  border: 1px dashed rgba(14, 165, 233, 0.22);
   animation: wc-spin 18s linear infinite;
 }
 
-/* Rotating SVG Rings */
 .wc-loader__ring-svg {
   position: absolute;
-  width: 240px;
-  height: 240px;
+  width: 260px;
+  height: 260px;
 }
 
 .wc-loader__ring-svg--outer {
   animation: wc-spin 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  filter: drop-shadow(0 0 12px rgba(14, 165, 233, 0.4));
+  filter: drop-shadow(0 0 16px rgba(14, 165, 233, 0.45));
 }
 
 .wc-loader__ring-svg--inner {
@@ -252,13 +245,13 @@
 }
 
 .wc-loader__crosshair--h {
-  width: 170px;
+  width: 180px;
   height: 1px;
 }
 
 .wc-loader__crosshair--v {
   width: 1px;
-  height: 170px;
+  height: 180px;
 }
 
 /* Center Core with Diamond Glyph & Counter */
@@ -273,22 +266,22 @@
 }
 
 .wc-loader__glyph-wrap {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  background: rgba(14, 165, 233, 0.08);
-  border: 1.5px solid rgba(14, 165, 233, 0.3);
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: rgba(14, 165, 233, 0.09);
+  border: 1.5px solid rgba(14, 165, 233, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 24px rgba(14, 165, 233, 0.35), inset 0 0 12px rgba(14, 165, 233, 0.15);
+  box-shadow: 0 0 28px rgba(14, 165, 233, 0.4), inset 0 0 14px rgba(14, 165, 233, 0.2);
   animation: wc-core-glow 2.5s ease-in-out infinite alternate;
 }
 
 .wc-loader__glyph {
-  font-size: 26px;
+  font-size: 28px;
   color: #38BDF8;
-  text-shadow: 0 0 16px rgba(14, 165, 233, 0.9);
+  text-shadow: 0 0 20px rgba(14, 165, 233, 0.95);
 }
 
 @keyframes wc-core-glow {
@@ -304,15 +297,15 @@
 }
 
 .wc-loader__counter-num {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: #38BDF8;
   letter-spacing: -0.5px;
-  text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.9);
 }
 
 .wc-loader__counter-symbol {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: #0EA5E9;
   margin-left: 1px;
@@ -321,7 +314,7 @@
 /* ── Brand Title ──────────────────────────────────────────────────────────── */
 .wc-loader__title {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: clamp(38px, 6vw, 48px);
+  font-size: clamp(40px, 6vw, 52px);
   font-weight: 500;
   letter-spacing: -0.8px;
   color: #FFFFFF;
@@ -351,7 +344,7 @@
   color: #38BDF8;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .wc-loader__sub-dot {
@@ -365,7 +358,7 @@
 /* ── Main Progress Bar & Laser Tip ────────────────────────────────────────── */
 .wc-loader__progress-box {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .wc-loader__progress-track {
@@ -384,7 +377,7 @@
   height: 100%;
   background: linear-gradient(90deg, #0284C7 0%, #0EA5E9 50%, #38BDF8 100%);
   border-radius: 12px;
-  transition: width 0.2s ease-out;
+  transition: width 0.15s ease-out;
   box-shadow: 0 0 16px rgba(14, 165, 233, 0.6), 0 0 32px rgba(14, 165, 233, 0.25);
   overflow: hidden;
 }
@@ -416,7 +409,7 @@
   border: 2px solid #38BDF8;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 16px #38BDF8, 0 0 32px #0EA5E9, 0 0 48px rgba(14, 165, 233, 0.8);
-  transition: left 0.2s ease-out;
+  transition: left 0.15s ease-out;
   z-index: 4;
 }
 
@@ -428,7 +421,7 @@
   justify-content: space-between;
   font-family: 'Geist Mono', monospace;
   font-size: 11px;
-  margin-bottom: 28px;
+  margin-bottom: 2px;
 }
 
 .wc-loader__console-left {
@@ -445,6 +438,16 @@
 .wc-loader__console-text {
   color: #CBD5E1;
   letter-spacing: 0.4px;
+}
+
+.wc-loader__console-sub {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  color: #64748B;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 20px;
+  padding-left: 16px;
 }
 
 .wc-loader__console-pct {
@@ -540,6 +543,110 @@
   color: #38BDF8;
 }
 
+/* ── Interactive Confirmation Prompt (YES to Continue) ─────────────────────── */
+.wc-loader__ready-prompt {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  animation: wc-pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes wc-pop-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.wc-loader__ready-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.wc-loader__ready-icon {
+  font-size: 12px;
+}
+
+.wc-loader__yes-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 50%, #38BDF8 100%);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 24px rgba(14, 165, 233, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  overflow: hidden;
+}
+
+.wc-loader__yes-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 36px rgba(14, 165, 233, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.wc-loader__yes-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.wc-loader__yes-pulse {
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+  animation: wc-pulse-glow 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes wc-pulse-glow {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%      { opacity: 0.6; transform: scale(1.2); }
+}
+
+.wc-loader__yes-arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s;
+}
+
+.wc-loader__yes-btn:hover .wc-loader__yes-arrow {
+  transform: translateX(4px);
+}
+
+.wc-loader__key-hint {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  color: #64748B;
+  letter-spacing: 0.5px;
+}
+
+.wc-loader__key-hint kbd {
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  color: #38BDF8;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
 /* ── Footer Info ──────────────────────────────────────────────────────────── */
 .wc-loader__footer {
   position: relative;
@@ -559,12 +666,12 @@
 
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .wc-loader__top-metrics { display: none; }
-  .wc-loader__scanner { width: 190px; height: 190px; margin-bottom: 20px; }
-  .wc-loader__ring--dashed { width: 186px; height: 186px; }
-  .wc-loader__ring-svg { width: 190px; height: 190px; }
-  .wc-loader__crosshair--h { width: 130px; }
-  .wc-loader__crosshair--v { height: 130px; }
+  .wc-loader__telemetry-feed { display: none; }
+  .wc-loader__scanner { width: 200px; height: 200px; margin-bottom: 20px; }
+  .wc-loader__ring--dashed { width: 196px; height: 196px; }
+  .wc-loader__ring-svg { width: 200px; height: 200px; }
+  .wc-loader__crosshair--h { width: 140px; }
+  .wc-loader__crosshair--v { height: 140px; }
   .wc-loader__modules { grid-template-columns: 1fr; }
   .wc-loader__footer { flex-direction: column; gap: 4px; text-align: center; }
 }
