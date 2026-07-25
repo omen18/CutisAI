@@ -1,8 +1,8 @@
 /* frontend/src/components/common/LoadingScreen/LoadingScreen.css */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600;700&display=swap');
 
-/* ── Clean Dark Blue Fullscreen Shell ─────────────────────────────────────── */
-.clean-loader {
+/* ── Screenshot-Matched Fullscreen Shell ─────────────────────────────────── */
+.exact-loader {
   position: fixed;
   inset: 0;
   z-index: 99999;
@@ -10,262 +10,234 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #090D16; /* Clean normal dark blue matching UserHome */
+  background: radial-gradient(ellipse at 50% 25%, #0F1E3D 0%, #060B17 75%, #03060D 100%);
   color: #F8FAFC;
   font-family: 'Geist', system-ui, sans-serif;
   overflow: hidden;
   user-select: none;
-  padding: 32px 24px;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 30px 20px 0;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.clean-loader--fading {
+.exact-loader--fading {
   opacity: 0;
+  transform: scale(1.04);
 }
 
-/* ── Top Header Brand ─────────────────────────────────────────────────────── */
-.clean-loader__header {
+/* ── Starry Canvas Background ────────────────────────────────────────────── */
+.exact-loader__stars-canvas {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 1000px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.clean-loader__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.clean-loader__logo-ring {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(14, 165, 233, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.clean-loader__logo-ring svg {
-  width: 14px;
-  height: 14px;
-}
-
-.clean-loader__brand-name {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 20px;
-  color: #FAF7F2;
-  letter-spacing: 0.3px;
-}
-
-/* ── Center Content Box ───────────────────────────────────────────────────── */
-.clean-loader__center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 480px;
-  width: 90%;
-  margin: auto 0;
-}
-
-/* ── Spinner Ring ─────────────────────────────────────────────────────────── */
-.clean-loader__spinner-wrap {
+/* ── Top Header Text: LOADING.. ───────────────────────────────────────────── */
+.exact-loader__top {
   position: relative;
-  width: 90px;
-  height: 90px;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 3;
+  margin-top: 15px;
+  text-align: center;
 }
 
-.clean-loader__spinner-ring {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 2px solid rgba(14, 165, 233, 0.15);
-  border-top-color: #0EA5E9;
-  border-right-color: #38BDF8;
-  animation: clean-spin 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-}
-
-.clean-loader__spinner-inner {
-  position: absolute;
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(56, 189, 248, 0.35);
-  animation: clean-spin-reverse 2.5s linear infinite;
-}
-
-.clean-loader__logo-icon {
-  position: absolute;
-  font-size: 28px;
-  color: #0EA5E9;
-  text-shadow: 0 0 16px rgba(14, 165, 233, 0.8);
-}
-
-@keyframes clean-spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes clean-spin-reverse {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(-360deg); }
-}
-
-/* ── Title & Percentage ───────────────────────────────────────────────────── */
-.clean-loader__title {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 32px;
-  font-weight: 500;
-  letter-spacing: 1px;
+.exact-loader__title {
+  font-family: 'Fredoka', 'Geist', sans-serif;
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 700;
+  letter-spacing: 2.5px;
   color: #FFFFFF;
-  margin-bottom: 4px;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.7), 0 0 32px rgba(56, 189, 248, 0.4);
 }
 
-.clean-loader__dots {
+.exact-loader__dots {
   color: #38BDF8;
-  animation: clean-dots 1.5s infinite;
+  animation: exact-dots-anim 1.5s infinite;
 }
 
-@keyframes clean-dots {
+@keyframes exact-dots-anim {
   0%, 20%  { opacity: 0; }
   50%      { opacity: 1; }
   100%     { opacity: 0; }
 }
 
-.clean-loader__pct {
-  font-family: 'Geist Mono', monospace;
-  font-size: 22px;
-  font-weight: 700;
-  color: #38BDF8;
-  letter-spacing: -0.5px;
-  margin-bottom: 8px;
-}
-
-.clean-loader__stage {
-  font-family: 'Geist Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
-  color: #94A3B8;
-  margin-bottom: 24px;
-  letter-spacing: 0.5px;
-}
-
-/* ── Progress Bar ─────────────────────────────────────────────────────────── */
-.clean-loader__bar-wrap {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.clean-loader__bar-track {
-  width: 100%;
-  height: 6px;
-  background: #162032;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(14, 165, 233, 0.2);
-}
-
-.clean-loader__bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #0284C7 0%, #0EA5E9 50%, #38BDF8 100%);
-  border-radius: 10px;
-  transition: width 0.15s ease-out;
-  box-shadow: 0 0 12px rgba(14, 165, 233, 0.5);
-}
-
-.clean-loader__sub {
-  font-size: 12px;
-  color: #64748B;
-  letter-spacing: 0.3px;
-}
-
-/* ── YES Confirmation Prompt ─────────────────────────────────────────────── */
-.clean-loader__prompt {
+/* ── Center Sphere Area (Moon / Earth Globe) ──────────────────────────────── */
+.exact-loader__center {
+  position: relative;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  width: 100%;
-  animation: clean-pop 0.4s ease-out forwards;
+  margin-top: 10px;
 }
 
-@keyframes clean-pop {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* Outer Cyan Atmospheric Glow Ring */
+.exact-loader__sphere-glow {
+  position: absolute;
+  top: -15px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.35) 0%, rgba(56, 189, 248, 0.15) 55%, transparent 75%);
+  filter: blur(12px);
+  pointer-events: none;
+  animation: exact-aura-pulse 4s ease-in-out infinite alternate;
 }
 
-.clean-loader__yes-btn {
+@keyframes exact-aura-pulse {
+  0%   { transform: scale(0.96); opacity: 0.7; }
+  100% { transform: scale(1.08); opacity: 1; }
+}
+
+/* Moon / Planet Sphere */
+.exact-loader__sphere {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #94A3B8 0%, #475569 45%, #1E293B 80%, #0F172A 100%);
+  box-shadow: inset -15px -15px 40px rgba(3, 7, 18, 0.85),
+              0 0 35px rgba(14, 165, 233, 0.5),
+              0 0 70px rgba(14, 165, 233, 0.25);
+  overflow: hidden;
+}
+
+/* Crater / Continent Shapes inside Moon */
+.exact-loader__crater {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.45);
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.exact-loader__crater--1 {
+  width: 90px;
+  height: 110px;
+  top: 30px;
+  left: 40px;
+  border-radius: 45% 55% 60% 40% / 50% 60% 40% 50%;
+}
+
+.exact-loader__crater--2 {
+  width: 70px;
+  height: 80px;
+  bottom: 25px;
+  right: 35px;
+  border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
+}
+
+.exact-loader__crater--3 {
+  width: 45px;
+  height: 45px;
+  top: 25px;
+  right: 50px;
+}
+
+.exact-loader__crater--4 {
+  width: 35px;
+  height: 35px;
+  bottom: 50px;
+  left: 30px;
+}
+
+.exact-loader__sphere-shading {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 75% 75%, rgba(6, 11, 23, 0.6) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── Percentage Readout Centered Below Sphere ────────────────────────────── */
+.exact-loader__pct {
+  font-family: 'Geist Mono', monospace;
+  font-size: clamp(22px, 3.5vw, 28px);
+  font-weight: 700;
+  color: #E2E8F0;
+  letter-spacing: 0.5px;
+  margin-top: 22px;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.5);
+}
+
+/* ── Interactive Confirmation Prompt (YES to Continue) ─────────────────────── */
+.exact-loader__prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  animation: exact-pop-in 0.4s ease-out forwards;
+}
+
+@keyframes exact-pop-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.exact-loader__yes-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 13px 32px;
+  gap: 8px;
+  padding: 12px 28px;
   border-radius: 10px;
   font-family: 'Geist', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
   color: #FFFFFF;
-  background: #0EA5E9;
+  background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 50%, #38BDF8 100%);
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.3);
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.clean-loader__yes-btn:hover {
-  background: #38BDF8;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(14, 165, 233, 0.45);
+.exact-loader__yes-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 30px rgba(14, 165, 233, 0.75);
 }
 
-.clean-loader__yes-btn svg {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.2s;
+.exact-loader__yes-btn svg {
+  width: 16px;
+  height: 16px;
 }
 
-.clean-loader__yes-btn:hover svg {
-  transform: translateX(4px);
-}
-
-.clean-loader__hint {
+.exact-loader__hint {
   font-family: 'Geist Mono', monospace;
   font-size: 10px;
-  color: #64748B;
+  color: #94A3B8;
 }
 
-.clean-loader__hint kbd {
-  background: rgba(14, 165, 233, 0.15);
-  border: 1px solid rgba(14, 165, 233, 0.3);
+.exact-loader__hint kbd {
+  background: rgba(14, 165, 233, 0.2);
+  border: 1px solid rgba(14, 165, 233, 0.4);
   color: #38BDF8;
-  padding: 1px 6px;
+  padding: 1px 5px;
   border-radius: 4px;
 }
 
-/* ── Footer ───────────────────────────────────────────────────────────────── */
-.clean-loader__footer {
+/* ── Bottom Village Landscape SVG ─────────────────────────────────────────── */
+.exact-loader__village {
+  position: relative;
+  z-index: 2;
   width: 100%;
-  max-width: 1000px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: 'Geist Mono', monospace;
-  font-size: 10px;
-  color: #475569;
-  letter-spacing: 0.5px;
-  border-top: 1px solid rgba(14, 165, 233, 0.1);
-  padding-top: 12px;
+  height: 240px;
+  margin-top: auto;
+  pointer-events: none;
+}
+
+.exact-loader__village svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 /* ── Responsive ───────────────────────────────────────────────────────────── */
-@media (max-width: 600px) {
-  .clean-loader__footer { flex-direction: column; gap: 4px; text-align: center; }
+@media (max-width: 768px) {
+  .exact-loader__sphere-glow { width: 190px; height: 190px; }
+  .exact-loader__sphere { width: 170px; height: 170px; }
+  .exact-loader__village { height: 180px; }
 }
