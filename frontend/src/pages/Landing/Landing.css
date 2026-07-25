@@ -4,10 +4,10 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --lp-bg:     #060A13;
-  --lp-bg2:    #0C1322;
-  --lp-bg3:    #111B2E;
-  --lp-card:   rgba(12, 19, 34, 0.7);
+  --lp-bg:     #090D16;
+  --lp-bg2:    #0F172A;
+  --lp-bg3:    #162032;
+  --lp-card:   #1E293B;
   --lp-cyan:   #0EA5E9;
   --lp-cyan2:  #38BDF8;
   --lp-cyan3:  #0284C7;
@@ -16,13 +16,13 @@
   --lp-rose2:  #FB7185;
   --lp-sage:   #10B981;
   --lp-gold:   #F59E0B;
-  --lp-white:  #F1F5F9;
+  --lp-white:  #F8FAFC;
   --lp-slate:  #CBD5E1;
   --lp-muted:  #94A3B8;
   --lp-muted2: #64748B;
   --lp-muted3: #475569;
-  --lp-line:   rgba(14, 165, 233, 0.12);
-  --lp-line2:  rgba(14, 165, 233, 0.25);
+  --lp-line:   rgba(14, 165, 233, 0.15);
+  --lp-line2:  rgba(14, 165, 233, 0.30);
   --lp-glass:  rgba(14, 165, 233, 0.06);
 }
 
@@ -48,16 +48,13 @@ a { text-decoration: none; color: inherit; }
 
 /* ── Canvas ───────────────────────────────────────────────────────────────── */
 .lp-canvas {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.5;
+  display: none;
 }
 
 /* ── Animated gradient orbs ───────────────────────────────────────────────── */
 .lp-orb {
-  position: fixed;
+  display: none;
+}
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
