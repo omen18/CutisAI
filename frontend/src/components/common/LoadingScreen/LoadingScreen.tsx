@@ -31,9 +31,9 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, isInitialBoot
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isReadyToProceed, handleProceed]);
 
-  // ── 12-Second Boot Progress Timer ──────────────────────────────────────────
+  // ── 5-Second Boot Progress Timer ───────────────────────────────────────────
   useEffect(() => {
-    const totalDurationMs = 12500;
+    const totalDurationMs = 5000;
     const intervalMs = 40;
     const increment = 100 / (totalDurationMs / intervalMs);
 
