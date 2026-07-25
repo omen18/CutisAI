@@ -1,8 +1,8 @@
 /* frontend/src/components/common/LoadingScreen/LoadingScreen.css */
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap');
 
-/* ── Fullscreen Container ─────────────────────────────────────────────────── */
-.wc-loader {
+/* ── Celestial Fullscreen Container ───────────────────────────────────────── */
+.celestial-loader {
   position: fixed;
   inset: 0;
   z-index: 99999;
@@ -10,581 +10,194 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #040711;
+  background: radial-gradient(ellipse at 50% 30%, #0B1938 0%, #030712 80%);
   color: #F8FAFC;
   font-family: 'Geist', system-ui, sans-serif;
   overflow: hidden;
   user-select: none;
-  padding: 24px 32px;
+  padding: 40px 24px;
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.wc-loader--fading {
+.celestial-loader--fading {
   opacity: 0;
   transform: scale(1.05);
   filter: blur(12px);
 }
 
-/* ── Fullscreen Background Neural Canvas ──────────────────────────────────── */
-.wc-loader__canvas {
+/* ── Fullscreen Starry Night Canvas ───────────────────────────────────────── */
+.celestial-loader__canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.7;
 }
 
-/* ── Cybernetic Radial Ambient Glows ─────────────────────────────────────── */
-.wc-loader__glow {
+/* ── Stylized Landscape Horizon Silhouette at Bottom ─────────────────────── */
+.celestial-loader__landscape {
   position: absolute;
-  border-radius: 50%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
   pointer-events: none;
-  filter: blur(130px);
-  z-index: 0;
-}
-
-.wc-loader__glow--cyan {
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, rgba(14, 165, 233, 0.02) 65%, transparent 100%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: wc-glow-pulse 6s ease-in-out infinite alternate;
-}
-
-.wc-loader__glow--rose {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(244, 63, 94, 0.12) 0%, transparent 70%);
-  bottom: -100px;
-  right: -100px;
-  animation: wc-glow-float 10s ease-in-out infinite alternate;
-}
-
-@keyframes wc-glow-pulse {
-  0%   { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
-  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
-}
-
-@keyframes wc-glow-float {
-  0%   { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-40px, -30px) scale(1.2); }
-}
-
-/* ── Technical Grid Overlay ───────────────────────────────────────────────── */
-.wc-loader__grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(14, 165, 233, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(14, 165, 233, 0.035) 1px, transparent 1px);
-  background-size: 36px 36px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 85%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Subtle CRT Scanline Sweep ────────────────────────────────────────────── */
-.wc-loader__scanline {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(14, 165, 233, 0.04) 50%,
-    transparent 100%
-  );
-  background-size: 100% 6px;
-  animation: wc-scan 5s linear infinite;
-  opacity: 0.5;
   z-index: 1;
 }
 
-@keyframes wc-scan {
-  0%   { background-position: 0 -100vh; }
-  100% { background-position: 0 100vh; }
+.celestial-loader__landscape svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-/* ── HUD Telemetry Frame Brackets ─────────────────────────────────────────── */
-.wc-loader__frame-bracket {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border-color: rgba(14, 165, 233, 0.45);
-  border-style: solid;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.wc-loader__frame-bracket--tl { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
-.wc-loader__frame-bracket--tr { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
-.wc-loader__frame-bracket--bl { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
-.wc-loader__frame-bracket--br { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
-
-/* ── Top Telemetry Status Bar ─────────────────────────────────────────────── */
-.wc-loader__top-bar {
+/* ── Top Header Text: "LOADING.." ─────────────────────────────────────────── */
+.celestial-loader__top {
   position: relative;
   z-index: 2;
-  width: 100%;
-  max-width: 1100px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.celestial-loader__loading-text {
+  font-family: 'Fredoka', 'Geist', sans-serif;
+  font-size: clamp(28px, 4.5vw, 38px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #FFFFFF;
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.8), 0 0 40px rgba(14, 165, 233, 0.4);
+  animation: celestial-pulse-text 2s ease-in-out infinite alternate;
+}
+
+@keyframes celestial-pulse-text {
+  0%   { text-shadow: 0 0 16px rgba(56, 189, 248, 0.7); }
+  100% { text-shadow: 0 0 32px rgba(56, 189, 248, 1), 0 0 60px rgba(14, 165, 233, 0.6); }
+}
+
+.celestial-loader__dots {
+  color: #38BDF8;
+  animation: celestial-dots 1.5s infinite;
+}
+
+@keyframes celestial-dots {
+  0%, 20%  { opacity: 0; }
+  50%      { opacity: 1; }
+  100%     { opacity: 0; }
+}
+
+.celestial-loader__stage-subtitle {
   font-family: 'Geist Mono', monospace;
   font-size: 11px;
-  color: #64748B;
-  letter-spacing: 0.8px;
-  border-bottom: 1px solid rgba(14, 165, 233, 0.12);
-  padding-bottom: 12px;
-}
-
-.wc-loader__sys-id {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #38BDF8;
   font-weight: 500;
-}
-
-.wc-loader__sys-pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 10px #10B981, 0 0 20px rgba(16, 185, 129, 0.4);
-  animation: wc-blink 1.5s ease-in-out infinite;
-}
-
-@keyframes wc-blink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.3; transform: scale(0.85); }
-}
-
-.wc-loader__telemetry-feed {
-  display: flex;
-  gap: 8px;
-}
-
-.wc-loader__telemetry-tag {
-  font-size: 10px;
-  padding: 2px 8px;
-  border-radius: 4px;
-  background: rgba(14, 165, 233, 0.08);
-  border: 1px solid rgba(14, 165, 233, 0.18);
+  letter-spacing: 1px;
   color: #94A3B8;
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  padding: 4px 14px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* ── Main HUD Content Area ────────────────────────────────────────────────── */
-.wc-loader__hud {
+/* ── Middle Area Percentage Counter (Under Sphere) ───────────────────────── */
+.celestial-loader__middle {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  max-width: 500px;
-  width: 92%;
-  margin: auto 0;
+  margin-top: 140px; /* Positions count right under the central globe */
 }
 
-/* ── Holographic Scanner Target Reticle ────────────────────────────────────── */
-.wc-loader__scanner {
+.celestial-loader__pct-display {
+  font-family: 'Geist Mono', monospace;
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 700;
+  color: #E0F2FE;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.9), 0 0 32px rgba(14, 165, 233, 0.5);
+}
+
+/* ── Bottom Section & Progress Bar ───────────────────────────────────────── */
+.celestial-loader__bottom {
   position: relative;
-  width: 260px;
-  height: 260px;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.wc-loader__ring--dashed {
-  position: absolute;
-  width: 256px;
-  height: 256px;
-  border-radius: 50%;
-  border: 1px dashed rgba(14, 165, 233, 0.22);
-  animation: wc-spin 18s linear infinite;
-}
-
-.wc-loader__ring-svg {
-  position: absolute;
-  width: 260px;
-  height: 260px;
-}
-
-.wc-loader__ring-svg--outer {
-  animation: wc-spin 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  filter: drop-shadow(0 0 16px rgba(14, 165, 233, 0.45));
-}
-
-.wc-loader__ring-svg--inner {
-  animation: wc-spin-reverse 4.5s linear infinite;
-}
-
-@keyframes wc-spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes wc-spin-reverse {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(-360deg); }
-}
-
-/* Crosshairs Target Lock */
-.wc-loader__crosshair {
-  position: absolute;
-  background: rgba(14, 165, 233, 0.25);
-}
-
-.wc-loader__crosshair--h {
-  width: 180px;
-  height: 1px;
-}
-
-.wc-loader__crosshair--v {
-  width: 1px;
-  height: 180px;
-}
-
-/* Center Core with Diamond Glyph & Counter */
-.wc-loader__center-core {
-  position: relative;
-  z-index: 3;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
-}
-
-.wc-loader__glyph-wrap {
-  width: 58px;
-  height: 58px;
-  border-radius: 16px;
-  background: rgba(14, 165, 233, 0.09);
-  border: 1.5px solid rgba(14, 165, 233, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 28px rgba(14, 165, 233, 0.4), inset 0 0 14px rgba(14, 165, 233, 0.2);
-  animation: wc-core-glow 2.5s ease-in-out infinite alternate;
-}
-
-.wc-loader__glyph {
-  font-size: 28px;
-  color: #38BDF8;
-  text-shadow: 0 0 20px rgba(14, 165, 233, 0.95);
-}
-
-@keyframes wc-core-glow {
-  0%   { transform: scale(0.96); border-color: rgba(14, 165, 233, 0.3); box-shadow: 0 0 16px rgba(14, 165, 233, 0.25); }
-  100% { transform: scale(1.05); border-color: rgba(56, 189, 248, 0.7); box-shadow: 0 0 36px rgba(14, 165, 233, 0.6); }
-}
-
-.wc-loader__counter {
-  display: flex;
-  align-items: baseline;
-  font-family: 'Geist Mono', monospace;
-  margin-top: 4px;
-}
-
-.wc-loader__counter-num {
-  font-size: 18px;
-  font-weight: 700;
-  color: #38BDF8;
-  letter-spacing: -0.5px;
-  text-shadow: 0 0 14px rgba(56, 189, 248, 0.9);
-}
-
-.wc-loader__counter-symbol {
-  font-size: 12px;
-  font-weight: 600;
-  color: #0EA5E9;
-  margin-left: 1px;
-}
-
-/* ── Brand Title ──────────────────────────────────────────────────────────── */
-.wc-loader__title {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: clamp(40px, 6vw, 52px);
-  font-weight: 500;
-  letter-spacing: -0.8px;
-  color: #FFFFFF;
-  margin-bottom: 6px;
-  line-height: 1;
-}
-
-.wc-loader__title-accent {
-  font-style: italic;
-  background: linear-gradient(135deg, #0EA5E9 0%, #38BDF8 50%, #F43F5E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.wc-loader__sub-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 16px;
-  border-radius: 20px;
-  background: rgba(14, 165, 233, 0.08);
-  border: 1px solid rgba(14, 165, 233, 0.2);
-  font-family: 'Geist Mono', monospace;
-  font-size: 10px;
-  font-weight: 600;
-  color: #38BDF8;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-
-.wc-loader__sub-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #10B981;
-  box-shadow: 0 0 8px #10B981;
-}
-
-/* ── Main Progress Bar & Laser Tip ────────────────────────────────────────── */
-.wc-loader__progress-box {
+  gap: 16px;
   width: 100%;
-  margin-bottom: 14px;
+  max-width: 460px;
+  margin-bottom: 20px;
 }
 
-.wc-loader__progress-track {
-  position: relative;
+.celestial-loader__bar-wrap {
+  width: 100%;
+}
+
+.celestial-loader__bar-track {
   width: 100%;
   height: 6px;
-  background: rgba(12, 19, 34, 0.9);
-  border-radius: 12px;
-  border: 1px solid rgba(14, 165, 233, 0.2);
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(56, 189, 248, 0.25);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
-  overflow: visible;
 }
 
-.wc-loader__progress-fill {
-  position: relative;
+.celestial-loader__bar-fill {
   height: 100%;
   background: linear-gradient(90deg, #0284C7 0%, #0EA5E9 50%, #38BDF8 100%);
-  border-radius: 12px;
-  transition: width 0.15s ease-out;
-  box-shadow: 0 0 16px rgba(14, 165, 233, 0.6), 0 0 32px rgba(14, 165, 233, 0.25);
-  overflow: hidden;
-}
-
-.wc-loader__fill-wave {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 100%
-  );
-  animation: wc-wave 1.8s infinite linear;
-}
-
-@keyframes wc-wave {
-  0%   { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.wc-loader__progress-laser {
-  position: absolute;
-  top: 50%;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #FFFFFF;
-  border: 2px solid #38BDF8;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 16px #38BDF8, 0 0 32px #0EA5E9, 0 0 48px rgba(14, 165, 233, 0.8);
-  transition: left 0.15s ease-out;
-  z-index: 4;
-}
-
-/* ── Console Readout ──────────────────────────────────────────────────────── */
-.wc-loader__console {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: 'Geist Mono', monospace;
-  font-size: 11px;
-  margin-bottom: 2px;
-}
-
-.wc-loader__console-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.wc-loader__console-prompt {
-  color: #0EA5E9;
-  font-weight: 700;
-}
-
-.wc-loader__console-text {
-  color: #CBD5E1;
-  letter-spacing: 0.4px;
-}
-
-.wc-loader__console-sub {
-  font-family: 'Geist Mono', monospace;
-  font-size: 10px;
-  color: #64748B;
-  text-align: left;
-  width: 100%;
-  margin-bottom: 20px;
-  padding-left: 16px;
-}
-
-.wc-loader__console-pct {
-  color: #38BDF8;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-/* ── Neural Pipeline Module Badges ───────────────────────────────────────── */
-.wc-loader__modules {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  width: 100%;
-}
-
-.wc-loader__module {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
   border-radius: 10px;
-  background: rgba(12, 19, 34, 0.6);
-  border: 1px solid rgba(14, 165, 233, 0.1);
-  backdrop-filter: blur(8px);
-  transition: all 0.35s ease;
-  text-align: left;
+  transition: width 0.15s ease-out;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.8);
 }
 
-.wc-loader__module--active {
-  background: rgba(14, 165, 233, 0.08);
-  border-color: rgba(14, 165, 233, 0.3);
-  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.1);
-}
-
-.wc-loader__module-indicator {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid rgba(100, 116, 139, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.35s ease;
-  flex-shrink: 0;
-}
-
-.wc-loader__module--active .wc-loader__module-indicator {
-  border-color: rgba(16, 185, 129, 0.6);
-  background: rgba(16, 185, 129, 0.15);
-}
-
-.wc-loader__module-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #475569;
-  transition: all 0.35s ease;
-}
-
-.wc-loader__module--active .wc-loader__module-dot {
-  background: #10B981;
-  box-shadow: 0 0 10px #10B981;
-}
-
-.wc-loader__module-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.wc-loader__module-name {
+.celestial-loader__brand-tag {
   font-family: 'Geist Mono', monospace;
   font-size: 10px;
-  font-weight: 600;
   color: #64748B;
   letter-spacing: 0.8px;
-  transition: color 0.35s ease;
 }
 
-.wc-loader__module--active .wc-loader__module-name {
-  color: #F1F5F9;
-}
-
-.wc-loader__module-detail {
-  font-family: 'Geist Mono', monospace;
-  font-size: 9px;
-  color: #475569;
-  letter-spacing: 0.5px;
-  transition: color 0.35s ease;
-}
-
-.wc-loader__module--active .wc-loader__module-detail {
-  color: #38BDF8;
-}
-
-/* ── Interactive Confirmation Prompt (YES to Continue) ─────────────────────── */
-.wc-loader__ready-prompt {
-  margin-top: 24px;
+/* ── Interactive Prompt (YES to Continue) ─────────────────────────────────── */
+.celestial-loader__prompt {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
   width: 100%;
-  animation: wc-pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: celestial-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-@keyframes wc-pop-in {
+@keyframes celestial-pop {
   from { opacity: 0; transform: translateY(16px) scale(0.95); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.wc-loader__ready-banner {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.celestial-loader__prompt-badge {
   font-family: 'Geist Mono', monospace;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1px;
   color: #10B981;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
   padding: 6px 16px;
   border-radius: 20px;
 }
 
-.wc-loader__ready-icon {
-  font-size: 12px;
-}
-
-.wc-loader__yes-btn {
-  position: relative;
+.celestial-loader__yes-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 32px;
+  padding: 14px 34px;
   border-radius: 12px;
   font-family: 'Geist', sans-serif;
   font-size: 14px;
@@ -594,84 +207,41 @@
   background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 50%, #38BDF8 100%);
   border: none;
   cursor: pointer;
-  box-shadow: 0 0 24px rgba(14, 165, 233, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-  overflow: hidden;
+  box-shadow: 0 0 24px rgba(14, 165, 233, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.wc-loader__yes-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 0 36px rgba(14, 165, 233, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+.celestial-loader__yes-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 36px rgba(14, 165, 233, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.wc-loader__yes-btn:active {
-  transform: translateY(1px) scale(0.98);
-}
-
-.wc-loader__yes-pulse {
-  position: absolute;
-  inset: -50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
-  animation: wc-pulse-glow 2s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes wc-pulse-glow {
-  0%, 100% { opacity: 0.2; transform: scale(0.8); }
-  50%      { opacity: 0.6; transform: scale(1.2); }
-}
-
-.wc-loader__yes-arrow {
+.celestial-loader__yes-btn svg {
   width: 18px;
   height: 18px;
   transition: transform 0.2s;
 }
 
-.wc-loader__yes-btn:hover .wc-loader__yes-arrow {
+.celestial-loader__yes-btn:hover svg {
   transform: translateX(4px);
 }
 
-.wc-loader__key-hint {
+.celestial-loader__hint {
   font-family: 'Geist Mono', monospace;
   font-size: 10px;
   color: #64748B;
-  letter-spacing: 0.5px;
 }
 
-.wc-loader__key-hint kbd {
-  background: rgba(14, 165, 233, 0.12);
+.celestial-loader__hint kbd {
+  background: rgba(14, 165, 233, 0.15);
   border: 1px solid rgba(14, 165, 233, 0.3);
   color: #38BDF8;
   padding: 1px 6px;
   border-radius: 4px;
-  font-size: 10px;
 }
 
-/* ── Footer Info ──────────────────────────────────────────────────────────── */
-.wc-loader__footer {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: 'Geist Mono', monospace;
-  font-size: 10px;
-  color: #475569;
-  letter-spacing: 0.6px;
-  border-top: 1px solid rgba(14, 165, 233, 0.12);
-  padding-top: 12px;
-}
-
-/* ── Responsive ───────────────────────────────────────────────────────────── */
+/* ── Responsive Adjustments ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .wc-loader__telemetry-feed { display: none; }
-  .wc-loader__scanner { width: 200px; height: 200px; margin-bottom: 20px; }
-  .wc-loader__ring--dashed { width: 196px; height: 196px; }
-  .wc-loader__ring-svg { width: 200px; height: 200px; }
-  .wc-loader__crosshair--h { width: 140px; }
-  .wc-loader__crosshair--v { height: 140px; }
-  .wc-loader__modules { grid-template-columns: 1fr; }
-  .wc-loader__footer { flex-direction: column; gap: 4px; text-align: center; }
+  .celestial-loader__middle { margin-top: 100px; }
+  .celestial-loader__landscape { height: 160px; }
 }
