@@ -7,11 +7,18 @@ interface LoadingScreenProps {
 }
 
 const MESSAGES = [
-  'Initializing CutisAI Neural Engine...',
-  'Loading ResUNet Segmentation Model (v2.1)...',
-  'Loading EfficientNet-B0 Classifier (INT8 ONNX)...',
-  'Calibrating Clinical Diagnostic Pipeline...',
-  'System Ready — Launching Workspace...',
+  'INITIALIZING CUTISAI NEURAL ENGINE v2.1',
+  'LOADING RESUNET SEGMENTATION WEIGHTS [DSC 0.9007]',
+  'MOUNTING EFFICIENTNET-B0 INT8 ONNX INFERENCE ENGINE',
+  'CALIBRATING CLINICAL TRIAGE & RISK ASSESSMENT PIPELINE',
+  'SYSTEM READY — LAUNCHING CLINICAL WORKSPACE...',
+];
+
+const LOG_ITEMS = [
+  { label: 'KERNEL', val: 'SYS_BOOT_OK' },
+  { label: 'SEGMENTATION', val: 'RESUNET_FP16' },
+  { label: 'CLASSIFIER', val: 'EFFNET_INT8' },
+  { label: 'LATENCY', val: '<1.8ms CPU' },
 ];
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, isInitialBoot = false }) => {
@@ -20,83 +27,136 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, isInitialBoot
   const [isFading, setIsFading] = useState<boolean>(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // ── Particle ring canvas ──────────────────────────────────────────────────
+  // ── High-Tech Neural Canvas Animation ─────────────────────────────────────
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const size = 260;
-    canvas.width = size;
-    canvas.height = size;
-    const cx = size / 2;
-    const cy = size / 2;
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
 
-    type Dot = { angle: number; radius: number; speed: number; size: number; opacity: number; drift: number; };
-    const dots: Dot[] = Array.from({ length: 40 }, (_, i) => ({
-      angle: (Math.PI * 2 * i) / 40 + Math.random() * 0.3,
-      radius: 80 + Math.random() * 20,
-      speed: 0.003 + Math.random() * 0.004,
-      size: Math.random() * 2 + 0.8,
-      opacity: Math.random() * 0.5 + 0.2,
-      drift: Math.random() * 0.5 - 0.25,
+    // Neural nodes
+    type Node = {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      alpha: number;
+      pulse: number;
+    };
+
+    const count = 55;
+    const nodes: Node[] = Array.from({ length: count }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      radius: Math.random() * 2 + 1,
+      alpha: Math.random() * 0.5 + 0.2,
+      pulse: Math.random() * Math.PI * 2,
     }));
 
-    let raf: number;
-    const draw = () => {
-      ctx.clearRect(0, 0, size, size);
+    // Data pulse packets along connections
+    type Packet = {
+      from: number;
+      to: number;
+      progress: number;
+      speed: number;
+    };
+    const packets: Packet[] = [];
 
-      // Outer ring glow
-      ctx.beginPath();
-      ctx.arc(cx, cy, 90, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(14, 165, 233, 0.08)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
+    const createPacket = () => {
+      if (nodes.length < 2) return;
+      const from = Math.floor(Math.random() * nodes.length);
+      let to = Math.floor(Math.random() * nodes.length);
+      while (to === from) to = Math.floor(Math.random() * nodes.length);
+      packets.push({ from, to, progress: 0, speed: 0.015 + Math.random() * 0.02 });
+    };
 
-      // Inner ring glow
-      ctx.beginPath();
-      ctx.arc(cx, cy, 65, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.06)';
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
+    const packetInterval = setInterval(createPacket, 400);
 
-      dots.forEach(d => {
-        d.angle += d.speed;
-        const x = cx + Math.cos(d.angle) * (d.radius + Math.sin(d.angle * 2) * d.drift * 8);
-        const y = cy + Math.sin(d.angle) * (d.radius + Math.cos(d.angle * 3) * d.drift * 8);
+    let animationFrame: number;
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Update & render nodes
+      nodes.forEach((n) => {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        n.pulse += 0.03;
+        const currentAlpha = n.alpha + Math.sin(n.pulse) * 0.15;
+
         ctx.beginPath();
-        ctx.arc(x, y, d.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(14, 165, 233, ${d.opacity})`;
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(14, 165, 233, ${Math.max(0.05, currentAlpha)})`;
         ctx.fill();
       });
 
-      // Draw connections between nearby dots
-      dots.forEach((a, i) => {
-        const ax = cx + Math.cos(a.angle) * a.radius;
-        const ay = cy + Math.sin(a.angle) * a.radius;
-        dots.slice(i + 1).forEach(b => {
-          const bx = cx + Math.cos(b.angle) * b.radius;
-          const by = cy + Math.sin(b.angle) * b.radius;
-          const dist = Math.hypot(ax - bx, ay - by);
-          if (dist < 50) {
+      // Render connections
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 140) {
+            const lineAlpha = (1 - dist / 140) * 0.15;
             ctx.beginPath();
-            ctx.moveTo(ax, ay);
-            ctx.lineTo(bx, by);
-            ctx.strokeStyle = `rgba(14, 165, 233, ${0.12 * (1 - dist / 50)})`;
-            ctx.lineWidth = 0.5;
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(14, 165, 233, ${lineAlpha})`;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
-        });
-      });
+        }
+      }
 
-      raf = requestAnimationFrame(draw);
+      // Render data packets
+      for (let i = packets.length - 1; i >= 0; i--) {
+        const p = packets[i];
+        p.progress += p.speed;
+        if (p.progress >= 1) {
+          packets.splice(i, 1);
+          continue;
+        }
+
+        const n1 = nodes[p.from];
+        const n2 = nodes[p.to];
+        const px = n1.x + (n2.x - n1.x) * p.progress;
+        const py = n1.y + (n2.y - n1.y) * p.progress;
+
+        ctx.beginPath();
+        ctx.arc(px, py, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.9)';
+        ctx.shadowColor = '#38BDF8';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      animationFrame = requestAnimationFrame(render);
     };
-    draw();
-    return () => cancelAnimationFrame(raf);
+
+    render();
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      clearInterval(packetInterval);
+      window.removeEventListener('resize', resize);
+    };
   }, []);
 
-  // ── Progress timer ────────────────────────────────────────────────────────
+  // ── Smooth Progress Timer ──────────────────────────────────────────────────
   useEffect(() => {
     if (!isInitialBoot) return;
 
@@ -133,100 +193,168 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, isInitialBoot
   const pct = isInitialBoot ? Math.round(progress) : null;
 
   return (
-    <div className={`cl ${isFading ? 'cl--fading' : ''}`}>
-      {/* Ambient background effects */}
-      <div className="cl-orb cl-orb--1" />
-      <div className="cl-orb cl-orb--2" />
-      <div className="cl-grid" />
+    <div className={`wc-loader ${isFading ? 'wc-loader--fading' : ''}`}>
+      {/* Full-screen Neural Mesh Background Canvas */}
+      <canvas ref={canvasRef} className="wc-loader__canvas" />
 
-      {/* Scan lines */}
-      <div className="cl-scanline" />
+      {/* Cybernetic Radial Glows & Grid */}
+      <div className="wc-loader__glow wc-loader__glow--cyan" />
+      <div className="wc-loader__glow wc-loader__glow--rose" />
+      <div className="wc-loader__grid" />
+      <div className="wc-loader__scanline" />
 
-      {/* Main content */}
-      <div className="cl-content">
+      {/* Outer Telemetry Framing Brackets */}
+      <div className="wc-loader__frame-bracket wc-loader__frame-bracket--tl" />
+      <div className="wc-loader__frame-bracket wc-loader__frame-bracket--tr" />
+      <div className="wc-loader__frame-bracket wc-loader__frame-bracket--bl" />
+      <div className="wc-loader__frame-bracket wc-loader__frame-bracket--br" />
 
-        {/* Animated particle ring canvas + center logo */}
-        <div className="cl-ring-wrap">
-          <canvas ref={canvasRef} className="cl-ring-canvas" />
+      {/* Header Telemetry Bar */}
+      <div className="wc-loader__top-bar">
+        <div className="wc-loader__sys-id">
+          <span className="wc-loader__sys-pulse" />
+          <span>CUTIS_AI // MEDICAL_NEURAL_NODE_01</span>
+        </div>
+        <div className="wc-loader__top-metrics">
+          {LOG_ITEMS.map((item) => (
+            <div key={item.label} className="wc-loader__top-metric">
+              <span className="wc-loader__metric-label">{item.label}:</span>
+              <span className="wc-loader__metric-val">{item.val}</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
-          {/* Spinning outer arc */}
-          <svg className="cl-arc cl-arc--outer" viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="92" fill="none" stroke="url(#arcGrad)" strokeWidth="1.5"
-              strokeDasharray="120 460" strokeLinecap="round" />
+      {/* Main HUD Container */}
+      <div className="wc-loader__hud">
+        {/* Holographic Target Reticle Scanner */}
+        <div className="wc-loader__scanner">
+          {/* Outer Dashed Compass Ring */}
+          <div className="wc-loader__ring wc-loader__ring--dashed" />
+
+          {/* Rotating Segmented Ring */}
+          <svg className="wc-loader__ring-svg wc-loader__ring-svg--outer" viewBox="0 0 240 240">
+            <circle
+              cx="120"
+              cy="120"
+              r="110"
+              fill="none"
+              stroke="url(#ringGradOuter)"
+              strokeWidth="1.5"
+              strokeDasharray="160 80 40 120"
+              strokeLinecap="round"
+            />
             <defs>
-              <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#0EA5E9" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#38BDF8" stopOpacity="0.1" />
+              <linearGradient id="ringGradOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0EA5E9" stopOpacity="0.95" />
+                <stop offset="50%" stopColor="#38BDF8" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#F43F5E" stopOpacity="0.3" />
               </linearGradient>
             </defs>
           </svg>
 
-          {/* Counter-spinning inner arc */}
-          <svg className="cl-arc cl-arc--inner" viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="72" fill="none" stroke="rgba(56,189,248,0.25)" strokeWidth="1"
-              strokeDasharray="40 420" strokeLinecap="round" />
+          {/* Counter-Spinning Inner HUD Ring */}
+          <svg className="wc-loader__ring-svg wc-loader__ring-svg--inner" viewBox="0 0 240 240">
+            <circle
+              cx="120"
+              cy="120"
+              r="85"
+              fill="none"
+              stroke="rgba(56, 189, 248, 0.3)"
+              strokeWidth="1.2"
+              strokeDasharray="30 25 90 25"
+              strokeLinecap="round"
+            />
           </svg>
 
-          {/* Center icon */}
-          <div className="cl-center-icon">
-            <span className="cl-icon-glyph">◈</span>
+          {/* Target Reticle Crosshairs */}
+          <div className="wc-loader__crosshair wc-loader__crosshair--h" />
+          <div className="wc-loader__crosshair wc-loader__crosshair--v" />
+
+          {/* Center Brand Badge & Percentage Readout */}
+          <div className="wc-loader__center-core">
+            <div className="wc-loader__glyph-wrap">
+              <span className="wc-loader__glyph">◈</span>
+            </div>
             {pct !== null && (
-              <span className="cl-icon-pct">{pct}%</span>
+              <div className="wc-loader__counter">
+                <span className="wc-loader__counter-num">{pct}</span>
+                <span className="wc-loader__counter-symbol">%</span>
+              </div>
             )}
           </div>
         </div>
 
-        {/* Brand */}
-        <h1 className="cl-brand">CutisAI</h1>
-        <div className="cl-badge">
-          <span className="cl-badge-dot" />
-          <span>v2.1 · Clinical Neural Engine</span>
+        {/* Brand Name & Tagline */}
+        <h1 className="wc-loader__title">
+          Cutis<span className="wc-loader__title-accent">AI</span>
+        </h1>
+
+        <div className="wc-loader__sub-tag">
+          <span className="wc-loader__sub-dot" />
+          <span>v2.1 · CLINICAL DEEP LEARNING PLATFORM</span>
         </div>
 
-        {/* Progress bar */}
-        <div className="cl-progress-wrap">
-          <div className="cl-progress-track">
+        {/* Main Neon Progress Bar */}
+        <div className="wc-loader__progress-box">
+          <div className="wc-loader__progress-track">
             <div
-              className="cl-progress-fill"
+              className="wc-loader__progress-fill"
               style={{ width: isInitialBoot ? `${Math.min(progress, 100)}%` : '100%' }}
-            />
+            >
+              <div className="wc-loader__fill-wave" />
+            </div>
             <div
-              className="cl-progress-glow"
+              className="wc-loader__progress-laser"
               style={{ left: isInitialBoot ? `${Math.min(progress, 100)}%` : '100%' }}
             />
           </div>
         </div>
 
-        {/* Status readout */}
-        <div className="cl-status-row">
-          <span className="cl-status-msg">
-            {isInitialBoot ? MESSAGES[msgIdx] : 'Loading workspace resources...'}
-          </span>
-          {pct !== null && (
-            <span className="cl-status-pct">{pct}%</span>
-          )}
+        {/* Console Message Readout */}
+        <div className="wc-loader__console">
+          <div className="wc-loader__console-left">
+            <span className="wc-loader__console-prompt">&gt;</span>
+            <span className="wc-loader__console-text">
+              {isInitialBoot ? MESSAGES[msgIdx] : 'INITIALIZING WORKSPACE...'}
+            </span>
+          </div>
+          {pct !== null && <span className="wc-loader__console-pct">{pct}%</span>}
         </div>
 
-        {/* Module status indicators */}
+        {/* Neural Pipeline Module Matrix */}
         {isInitialBoot && (
-          <div className="cl-modules">
+          <div className="wc-loader__modules">
             {[
-              { name: 'RESUNET', thresh: 25 },
-              { name: 'EFFNET-B0', thresh: 50 },
-              { name: 'PIPELINE', thresh: 75 },
-              { name: 'WORKSPACE', thresh: 90 },
-            ].map(m => (
-              <div key={m.name} className={`cl-module ${progress >= m.thresh ? 'cl-module--on' : ''}`}>
-                <span className="cl-module-dot" />
-                <span className="cl-module-name">{m.name}</span>
-              </div>
-            ))}
+              { name: 'RESUNET SEG', detail: 'DSC 0.9007', thresh: 25 },
+              { name: 'EFFNET-B0', detail: 'INT8 ONNX', thresh: 50 },
+              { name: 'ISIC PIPELINE', detail: '33K+ IMGS', thresh: 75 },
+              { name: 'TRIAGE ENGINE', detail: 'ACTIVE', thresh: 90 },
+            ].map((m) => {
+              const active = progress >= m.thresh;
+              return (
+                <div
+                  key={m.name}
+                  className={`wc-loader__module ${active ? 'wc-loader__module--active' : ''}`}
+                >
+                  <div className="wc-loader__module-indicator">
+                    <span className="wc-loader__module-dot" />
+                  </div>
+                  <div className="wc-loader__module-info">
+                    <span className="wc-loader__module-name">{m.name}</span>
+                    <span className="wc-loader__module-detail">{m.detail}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         )}
+      </div>
 
-        <div className="cl-tagline">
-          Deep Learning Skin Lesion Analysis Platform
-        </div>
+      {/* Footer Classification & Compliance Note */}
+      <div className="wc-loader__footer">
+        <span>RESEARCH PROTOTYPE · RESUNET + EFFICIENTNET-B0 · ISIC 2018</span>
+        <span>YASH RAJ SHARAN © 2026</span>
       </div>
     </div>
   );
