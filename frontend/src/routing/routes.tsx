@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import LoadingScreen from '../components/common/LoadingScreen/LoadingScreen';
+import CustomCursor from '../components/common/CustomCursor/CustomCursor';
 
 const Landing         = lazy(() => import('../pages/Landing/Landing'));
 const UserHome        = lazy(() => import('../pages/UserHome/UserHome'));
@@ -26,6 +27,7 @@ const AppRouter: React.FC = () => {
 
   return (
     <BrowserRouter>
+      <CustomCursor />
       <Suspense fallback={<LoadingScreen isInitialBoot={false} />}>
         <Routes>
           {/* Root → always go to landing first */}
