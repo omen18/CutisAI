@@ -108,22 +108,123 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete, isInitialBoot
       {/* Starry Canvas Background */}
       <canvas ref={canvasRef} className="exact-loader__stars-canvas" />
 
-      {/* Top Header: LOADING.. */}
+      {/* Top Header: CUTIS AI SVG Logo & LOADING.. */}
       <div className="exact-loader__top">
+        <div className="exact-loader__brand-svg-container">
+          <svg className="exact-loader__brand-svg" viewBox="0 0 240 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cutisAiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0EA5E9" />
+                <stop offset="50%" stopColor="#38BDF8" />
+                <stop offset="100%" stopColor="#7DD3FC" />
+              </linearGradient>
+              <linearGradient id="whiteTextGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#FFFFFF" />
+                <stop offset="100%" stopColor="#E2E8F0" />
+              </linearGradient>
+              <filter id="cyanGlowFilter" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            {/* Emblem: Shield & AI Neural Core */}
+            <g transform="translate(6, 4)">
+              <path
+                d="M 21 3 L 39 21 L 21 39 L 3 21 Z"
+                fill="rgba(14, 165, 233, 0.15)"
+                stroke="url(#cutisAiGradient)"
+                strokeWidth="3"
+                strokeLinejoin="round"
+                filter="url(#cyanGlowFilter)"
+              />
+              <circle cx="21" cy="21" r="4.5" fill="#38BDF8" />
+              <path d="M 21 8 V 16.5 M 21 25.5 V 34 M 8 21 H 16.5 M 25.5 21 H 34" stroke="#38BDF8" strokeWidth="1.8" strokeLinecap="round" opacity="0.85" />
+            </g>
+
+            {/* Vector Text: CUTIS */}
+            <text
+              x="56"
+              y="30"
+              fill="url(#whiteTextGradient)"
+              fontFamily="'Fredoka', 'Geist', sans-serif"
+              fontSize="24"
+              fontWeight="700"
+              letterSpacing="2.5"
+            >
+              CUTIS
+            </text>
+
+            {/* Vector Text: AI */}
+            <text
+              x="154"
+              y="30"
+              fill="url(#cutisAiGradient)"
+              fontFamily="'Fredoka', 'Geist', sans-serif"
+              fontSize="24"
+              fontWeight="800"
+              letterSpacing="2.5"
+              filter="url(#cyanGlowFilter)"
+            >
+              AI
+            </text>
+          </svg>
+        </div>
         <h1 className="exact-loader__title">
           LOADING<span className="exact-loader__dots">..</span>
         </h1>
       </div>
 
-      {/* Center Sphere Area (Moon/Globe with Atmospheric Glow) */}
+      {/* Center Sphere Area (3D Rotating Earth Globe with Atmospheric Halo) */}
       <div className="exact-loader__center">
-        <div className="exact-loader__sphere-glow" />
-        <div className="exact-loader__sphere">
-          {/* Moon Surface Craters / Continent Patterns */}
-          <div className="exact-loader__crater exact-loader__crater--1" />
-          <div className="exact-loader__crater exact-loader__crater--2" />
-          <div className="exact-loader__crater exact-loader__crater--3" />
-          <div className="exact-loader__crater exact-loader__crater--4" />
+        <div className="exact-loader__sphere-glow exact-loader__sphere-glow--earth" />
+        
+        <div className="exact-loader__sphere exact-loader__sphere--earth">
+          {/* Seamless Rotating Earth Map (Continents & Ocean Swirls) */}
+          <div className="exact-loader__earth-map">
+            <svg viewBox="0 0 800 400" className="exact-loader__earth-svg">
+              <defs>
+                <linearGradient id="earthLandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#34D399" />
+                  <stop offset="50%" stopColor="#10B981" />
+                  <stop offset="100%" stopColor="#047857" />
+                </linearGradient>
+              </defs>
+
+              {/* Earth Continents (Set 1 & Set 2 for seamless infinite loop) */}
+              <g fill="url(#earthLandGradient)" stroke="#059669" strokeWidth="1">
+                {/* Set 1: Americas, Europe, Africa, Asia, Australia */}
+                <path d="M 50,70 Q 80,50 120,60 Q 150,80 135,130 Q 110,150 85,130 Q 60,100 50,70 Z" />
+                <path d="M 115,140 Q 145,140 165,180 Q 155,250 125,270 Q 95,230 105,180 Z" />
+                <path d="M 220,50 Q 270,40 300,60 Q 290,100 250,100 Q 220,80 220,50 Z" />
+                <path d="M 230,110 Q 300,100 320,160 Q 300,240 250,250 Q 210,210 230,110 Z" />
+                <path d="M 320,50 Q 410,30 450,80 Q 440,150 370,150 Q 320,110 320,50 Z" />
+                <path d="M 390,180 Q 440,170 450,210 Q 420,250 380,230 Z" />
+
+                {/* Set 2: Repeat (+400px X Offset for seamless scrolling) */}
+                <path d="M 450,70 Q 480,50 520,60 Q 550,80 535,130 Q 510,150 485,130 Q 460,100 450,70 Z" />
+                <path d="M 515,140 Q 545,140 565,180 Q 555,250 525,270 Q 495,230 505,180 Z" />
+                <path d="M 620,50 Q 670,40 700,60 Q 690,100 650,100 Q 620,80 620,50 Z" />
+                <path d="M 630,110 Q 700,100 720,160 Q 700,240 650,250 Q 610,210 630,110 Z" />
+                <path d="M 720,50 Q 810,30 850,80 Q 840,150 770,150 Q 720,110 720,50 Z" />
+                <path d="M 790,180 Q 840,170 850,210 Q 820,250 780,230 Z" />
+              </g>
+
+              {/* Cloud Layer Swirls */}
+              <g fill="none" stroke="rgba(255, 255, 255, 0.6)" strokeWidth="9" strokeLinecap="round">
+                <path d="M 30,90 Q 110,70 190,100" />
+                <path d="M 210,190 Q 280,220 370,200" />
+                <path d="M 430,90 Q 510,70 590,100" />
+                <path d="M 610,190 Q 680,220 770,200" />
+              </g>
+            </svg>
+          </div>
+
+          {/* 3D Inner Edge Atmosphere & Spherical Shadow Overlay */}
+          <div className="exact-loader__earth-atmosphere" />
           <div className="exact-loader__sphere-shading" />
         </div>
 
