@@ -14,17 +14,17 @@
 
 ## 🌟 Application Screenshots
 
-| 🚀 System Boot Loading | 🏠 Landing & Role Selection |
+| 🚀 System Boot Loading | 🏠 Landing Hero |
 | :---: | :---: |
-| ![Loading Screen](images/loading_screen.png) | ![Landing Page](images/landing_hero.png) |
+| ![Loading Screen](images/loading_screen.png) | ![Landing Hero](images/landing_hero.png) |
 
-| 🩺 Patient Portal Upload | 📊 Patient Diagnostic Report |
+| ⚙️ Clinical AI Pipeline | 👥 Role Portal Selection |
 | :---: | :---: |
-| ![Portal Selection](images/landing_portals.png) | ![Patient Portal](images/patient_portal.png) |
+| ![How It Works Pipeline](images/landing_pipeline.png) | ![Portal Selection](images/landing_portals.png) |
 
-| 🏥 Clinical Doctor Dashboard |
-| :---: |
-| ![Clinical Dashboard](images/clinical_dashboard.png) |
+| 🩺 Patient Diagnostic Portal | 🏥 Clinical Doctor Dashboard |
+| :---: | :---: |
+| ![Patient Portal](images/patient_portal.png) | ![Clinical Dashboard](images/clinical_dashboard.png) |
 
 ---
 
