@@ -16,7 +16,7 @@
 
 | 🚀 System Boot Loading | 🏠 Landing & Role Selection |
 | :---: | :---: |
-| ![Loading Screen](images/loading_screen.jpg) | ![Landing Page](images/landing_hero.png) |
+| ![Loading Screen](images/loading_screen.png) | ![Landing Page](images/landing_hero.png) |
 
 | 🩺 Patient Portal Upload | 📊 Patient Diagnostic Report |
 | :---: | :---: |
